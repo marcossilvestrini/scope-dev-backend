@@ -185,7 +185,7 @@ OpenStack oferece uma plataforma robusta e extensível, com centenas de configur
 - Ferramentas adicionais: Helm e Kustomize para configuração e gerenciamento.
 - Segurança: RBAC, Network Policies e gestão de Secrets.
 
-### Harbor
+### 🛡️Harbor
 
 - Registro seguro de contêineres para armazenamento e distribuição de imagens Docker.
 - Integração nativa com Kubernetes.
@@ -193,7 +193,7 @@ OpenStack oferece uma plataforma robusta e extensível, com centenas de configur
 
 ## Redes e Segurança
 
-### Redes
+### 🌐Redes
 
 - Redes em Kubernetes: Serviços (ClusterIP, NodePort, LoadBalancer), Ingress e CNIs (Calico, Flannel, Cilium).
 - Protocolos essenciais: TCP/IP, UDP, HTTP/HTTPS, DNS.
@@ -298,58 +298,57 @@ OpenStack oferece uma plataforma robusta e extensível, com centenas de configur
 
 🔧 Infraestrutura e Orquestração
 
-🧱 OpenStack (geral)
-⚙️ Nova (Compute)
-🌐 Neutron (Networking)
-🔑 Keystone (Identity)
-💽 Cinder (Block Storage)
-🖼️ Glance (Image)
-🌩️ Heat (Orchestration)
-🧩 Horizon (Dashboard)
-📦 Swift (Object Storage)
-🧪 Mistral (Workflows)
-📜 Congress (Policy Enforcement)
-🔍 Monasca (Monitoring)
-📊 Ceilometer/Gnocchi (Telemetry)
-🧠 Sahara (Big Data)
-🛢️ Trove (Database)
-💬 Zaqar (Messaging)
-📆 Blazar (Reservation)
-🧰 Oslo (Common Libraries)
-🧲 Ironic (Bare Metal)
-🗂️ Manila (Shared File Systems)
-🧪 Magnum (K8s Provisioning)
-☁️ Serviços de Nuvem & Containers
+🧱 OpenStack (geral)  
+⚙️ Nova (Compute)  
+🌐 Neutron (Networking)  
+🔑 Keystone (Identity)  
+💽 Cinder (Block Storage)  
+🖼️ Glance (Image)  
+🌩️ Heat (Orchestration)  
+🧩 Horizon (Dashboard)  
+📦 Swift (Object Storage)  
+🧪 Mistral (Workflows)  
+📜 Congress (Policy Enforcement)  
+🔍 Monasca (Monitoring)  
+📊 Ceilometer/Gnocchi (Telemetry)  
+🧠 Sahara (Big Data)  
+🛢️ Trove (Database)  
+💬 Zaqar (Messaging)  
+📆 Blazar (Reservation)  
+🧰 Oslo (Common Libraries)  
+🧲 Ironic (Bare Metal)  
+🗂️ Manila (Shared File Systems)  
+🧪 Magnum (K8s Provisioning)  
+☁️ Serviços de Nuvem & Containers  
 
-🐳 Docker
-☸️ Kubernetes
-🛡️ Harbor
-⚓ Helm
-
+🐳 Docker  
+☸️ Kubernetes  
+🛡️ Harbor  
+⚓ Helm  
 🧬 Kustomize
 
 🔒 Segurança e Identidade
 
-🛡️ RBAC / Policies
-🧾 Secrets Management (Barbican)
-🧑‍💻 Auth Tokens / Keystone
+🛡️ RBAC / Policies  
+🧾 Secrets Management (Barbican)  
+🧑‍💻 Auth Tokens / Keystone  
 
 📡 Comunicação e Mensageria
 
-🛰️ Kafka (Streaming)
-🐇 RabbitMQ (Mensageria)
-📨 Pub/Sub (Assíncrono)
+🛰️ Kafka (Streaming)  
+🐇 RabbitMQ (Mensageria)  
+📨 Pub/Sub (Assíncrono)  
 
 🧠 Linguagens e Ambientes
 
-🦫 Go (Golang)
-🐍 Python
-🐚 Bash
-🐧 Linux
+🦫 Go (Golang)  
+🐍 Python  
+🐚 Bash  
+🐧 Linux  
 
 🧭 Observabilidade
 
-📈 Prometheus
-📊 Grafana
-🧾 Logs
-⏱️ Tracing
+📈 Prometheus  
+📊 Grafana  
+🧾 Logs  
+⏱️ Tracing  
