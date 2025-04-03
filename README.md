@@ -3,13 +3,13 @@
 
 ## Infraestrutura e Cloud
 
-### OpenStack
+### 🧱 OpenStack
 
 OpenStack é uma plataforma de código aberto para construção e gerenciamento de ambientes de nuvem pública e privada, criada inicialmente pela NASA e Rackspace em 2010. Hoje é mantida pela OpenInfra Foundation, sendo amplamente utilizada por provedores de cloud, instituições financeiras e grandes corporações para orquestrar infraestrutura como serviço (IaaS).
 
 #### Arquitetura e Componentes Principais
 
-1. 📦**Nova (Compute)**
+1. ⚙️**Nova (Compute)**
    - Gerencia a criação e execução de máquinas virtuais.
    - Integra-se com o hypervisor (KVM, QEMU, etc).
    - CLI:
@@ -21,7 +21,7 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack server reboot <server_id>
      ```
 
-2. 📡**Neutron (Networking)**
+2. 🌐**Neutron (Networking)**
    - Gerencia redes virtuais, sub-redes, roteadores, e balanceadores de carga.
    - Suporta múltiplos backends como Open vSwitch e Linux Bridge.
    - CLI:
@@ -69,7 +69,7 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack port list --network <nome_rede>
      ```
 
-3. 🔐**Keystone (Identity)**
+3. 🔑**Keystone (Identity)**
    - Serviço de autenticação e autorização centralizado.
    - Gera tokens, define domínios, projetos, usuários e papéis.
    - CLI:
@@ -108,7 +108,7 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack image show <id_imagem> -f json | jq '.properties'
      ```
 
-5. **Cinder (Block Storage)**
+5. 💽**Cinder (Block Storage)**
    - Fornece volumes persistentes para instâncias.
    - CLI:
 
@@ -118,10 +118,10 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack volume delete <id_volume>
      ```
 
-6. **Horizon (Dashboard)**
+6. 🧩**Horizon (Dashboard)**
    - Interface web para administração de recursos OpenStack.
 
-7. **Swift (Object Storage)**
+7. 📦**Swift (Object Storage)**
    - Armazenamento de objetos escalável.
    - CLI:
 
@@ -131,7 +131,7 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack object list <nome_container>
      ```
 
-8. **Heat (Orquestração)**
+8. 🌩️**Heat (Orquestração)**
    - Permite orquestrar recursos através de templates YAML.
    - CLI:
 
@@ -140,13 +140,13 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
      openstack stack list
      ```
 
-9. **Ceilometer + Gnocchi (Telemetry)**
+9. 📊**Ceilometer + Gnocchi (Telemetry)**
    - Monitoramento e coleta de métricas.
 
-10. **Barbican (Secrets Management)**
+10. 🧾**Barbican (Secrets Management)**
     - Armazena e gerencia segredos como senhas, chaves e certificados.
 
-11. **Designate (DNSaaS)**
+11. 🧭**Designate (DNSaaS)**
     - Gerencia zonas e registros DNS.
     - CLI:
 
@@ -155,18 +155,18 @@ OpenStack é uma plataforma de código aberto para construção e gerenciamento 
       openstack recordset create <id_zona> --record "192.168.1.10" --type A api.exemplo.com.
       ```
 
-12. **Magnum (Kubernetes as a Service)**
+12. 🧪**Magnum (Kubernetes as a Service)**
     - Provisão de clusters Kubernetes ou Docker Swarm.
 
-#### API
+#### 🔌API
 
 Se preferir consumir de forma mais estruturada, existem SDKs oficiais:
 
-**Python SDK:** openstacksdk, usado em Ansible, Terraform e CLI oficial.
+**🧩Python SDK:** openstacksdk, usado em Ansible, Terraform e CLI oficial.
 
-**Go SDK:** gophercloud (mantido pela comunidade).
+**🧩Go SDK:** gophercloud (mantido pela comunidade).
 
-**Java SDK:** openstack4j.
+**🧩Java SDK:** openstack4j.
 
 #### Boas Práticas de Administração
 
@@ -177,7 +177,7 @@ Se preferir consumir de forma mais estruturada, existem SDKs oficiais:
 
 OpenStack oferece uma plataforma robusta e extensível, com centenas de configurações possíveis para customização de ambientes altamente escaláveis.
 
-### Kubernetes
+### ☸️Kubernetes
 
 - Plataforma de orquestração de contêineres para automação de implantação, escalonamento e operações de aplicações em contêineres.
 - Principais componentes: API Server, Scheduler, etcd, Controller Manager.
@@ -293,3 +293,63 @@ OpenStack oferece uma plataforma robusta e extensível, com centenas de configur
 
 - Participação ativa em projetos abertos.
 - Melhores práticas para contribuição: Issues, Pull Requests e revisões técnicas.
+
+### Ícones para Títulos e Subtítulos Técnicos
+
+🔧 Infraestrutura e Orquestração
+
+🧱 OpenStack (geral)
+⚙️ Nova (Compute)
+🌐 Neutron (Networking)
+🔑 Keystone (Identity)
+💽 Cinder (Block Storage)
+🖼️ Glance (Image)
+🌩️ Heat (Orchestration)
+🧩 Horizon (Dashboard)
+📦 Swift (Object Storage)
+🧪 Mistral (Workflows)
+📜 Congress (Policy Enforcement)
+🔍 Monasca (Monitoring)
+📊 Ceilometer/Gnocchi (Telemetry)
+🧠 Sahara (Big Data)
+🛢️ Trove (Database)
+💬 Zaqar (Messaging)
+📆 Blazar (Reservation)
+🧰 Oslo (Common Libraries)
+🧲 Ironic (Bare Metal)
+🗂️ Manila (Shared File Systems)
+🧪 Magnum (K8s Provisioning)
+☁️ Serviços de Nuvem & Containers
+
+🐳 Docker
+☸️ Kubernetes
+🛡️ Harbor
+⚓ Helm
+
+🧬 Kustomize
+
+🔒 Segurança e Identidade
+
+🛡️ RBAC / Policies
+🧾 Secrets Management (Barbican)
+🧑‍💻 Auth Tokens / Keystone
+
+📡 Comunicação e Mensageria
+
+🛰️ Kafka (Streaming)
+🐇 RabbitMQ (Mensageria)
+📨 Pub/Sub (Assíncrono)
+
+🧠 Linguagens e Ambientes
+
+🦫 Go (Golang)
+🐍 Python
+🐚 Bash
+🐧 Linux
+
+🧭 Observabilidade
+
+📈 Prometheus
+📊 Grafana
+🧾 Logs
+⏱️ Tracing
