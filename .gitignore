@@ -1,0 +1,72 @@
+
+# Diretórios e arquivos temporários
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv
+.envrc
+
+# Go
+bin/
+*.exe
+*.test
+*.out
+
+# Bash
+*.sh~
+*.bash_history
+
+# Kubernetes
+*.yaml~
+.kube/
+.kustomize/
+
+# Terraform / Ansible
+.terraform/
+*.tfstate
+*.tfstate.backup
+inventory/*.retry
+*.bak
+
+# OpenStack
+openstack_rc.sh
+*.qcow2
+*.iso
+
+# Docker
+*.tar
+*.img
+.docker/
+docker-compose.override.yml
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Certificados/Secrets
+*.crt
+*.key
+*.pem
+secrets.env
+
+# Logs e Monitoramento
+prometheus-data/
+grafana-data/
+
+# Outros
+*.pid
+nohup.out
