@@ -1,0 +1,70 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Enable experimental features
+ENV["VAGRANT_EXPERIMENTAL"] = "Disks"
+
+# Plugins
+required_plugins = ["vagrant-vmware-desktop", "vagrant-reload", "vagrant-disksize"]
+required_plugins.each do |plugin|
+  unless Vagrant.has_plugin?(plugin)
+    system "vagrant plugin install #{plugin}"
+    puts "Installed the #{plugin} plugin."
+  end
+end
+
+Vagrant.configure("2") do |config|
+
+  # LOCAL VARIABLES
+  VM_NAME = "lab"
+  BOX_NAME = "generic/debian12"
+
+  # BOX
+  config.vm.box = BOX_NAME
+  config.vm.box_download_insecure = true
+
+  # MOUNTS
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.synced_folder "./scripts/", "/home/vagrant/scripts"
+  config.vm.synced_folder "./configs/", "/home/vagrant/configs"
+  config.vm.synced_folder "./security/", "/home/vagrant/security"
+
+  # BEGIN INSTANCE lab
+  config.vm.define "#{VM_NAME}-01" do |lab|
+
+    # hostname
+    lab.vm.hostname = "#{VM_NAME}-01"
+
+    # STORAGE
+    lab.vm.disk :disk, size: "200GB", name: "lab_storage", primary: false
+
+    # VMware Workstation configuration
+    lab.vm.provider "vmware_workstation" do |vmware|
+      vmware.linked_clone = true
+      vmware.clone_directory = "E:\\Servers\\VMWare\\#{VM_NAME}-01"
+      vmware.whitelist_verified = true
+      vmware.gui = true
+      #vmware.vmx["virtualHW.version"] = "10"
+      vmware.vmx["displayName"] = "#{VM_NAME}-01"
+      vmware.vmx["memsize"] = "65536"
+      vmware.vmx["numvcpus"] = "16"
+      vmware.vmx["cpuid.coresPerSocket"] = "1"
+      vmware.vmx["vhv.enable"] = "TRUE"  # Enable virtualization engine (nested virtualization)
+      # vmware.vmx["hypervisor.cpuid.v0"] = "FALSE"  # Ensure guest OS can see CPU features
+      # vmware.vmx["monitor.virtual_mmu"] = "hardware"  # Use hardware memory management unit
+      # vmware.vmx["monitor.virtual_exec"] = "hardware"  # Use hardware execution virtualization
+    end
+
+    # NETWORK CONFIGURATION
+    lab.vm.network "public_network", mode: "bridge", auto_config: false
+    # manual ip
+    lab.vm.provision "shell", name: "[configure-network]", path: "./scripts/network.sh", privileged: true
+
+    # CLOUD-INIT
+    lab.vm.provision "shell", name: "[cloud-init]", path: "./scripts/cloud-init.sh", privileged: false
+
+    # lab.vm.provision :reload
+  end
+  # END INSTANCE LAB
+
+end
