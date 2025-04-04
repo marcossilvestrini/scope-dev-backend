@@ -63,6 +63,12 @@ Vagrant.configure("2") do |config|
     # CLOUD-INIT
     lab.vm.provision "shell", name: "[cloud-init]", path: "./scripts/cloud-init.sh", privileged: false
 
+    # KUBERNETES
+    lab.vm.provision "shell", name: "[kubernetes]", path: "./scripts/kubernetes.sh", privileged: false
+
+    # GO
+    lab.vm.provision "shell", name: "[golang]", path: "./scripts/go.sh", privileged: false
+
     # lab.vm.provision :reload
   end
   # END INSTANCE LAB
