@@ -67,6 +67,13 @@ secrets.env
 prometheus-data/
 grafana-data/
 
+# security
+security/
+
+# vagrant
+.vagrant/
+
 # Outros
 *.pid
 nohup.out
+
