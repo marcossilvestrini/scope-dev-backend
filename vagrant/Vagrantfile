@@ -56,7 +56,15 @@ Vagrant.configure("2") do |config|
     end
 
     # NETWORK CONFIGURATION
-    lab.vm.network "public_network", mode: "bridge", auto_config: false
+    lab.vm.network "public_network", mode: "bridge", auto_config: false, bridge: [
+                                       "Intel(R) I211 Gigabit Network Connection",
+                                       "MediaTek Wi-Fi 6 MT7921 Wireless LAN",
+                                     ]
+    lab.vm.network "public_network", mode: "bridge", auto_config: false, bridge: [
+                                       "Intel(R) I211 Gigabit Network Connection",
+                                       "MediaTek Wi-Fi 6 MT7921 Wireless LAN",
+                                     ]
+
     # manual ip
     lab.vm.provision "shell", name: "[configure-network]", path: "./scripts/network.sh", privileged: true
 
@@ -69,11 +77,14 @@ Vagrant.configure("2") do |config|
     # RELOAD
     lab.vm.provision :reload
 
-    # GO
-    lab.vm.provision "shell", name: "[golang]", path: "./scripts/go.sh", privileged: false
+    # # OPENSTACK
+    # #lab.vm.provision "shell", name: "[openstack]", path: "./scripts/openstack.sh", privileged: false
 
     # KUBERNETES
     lab.vm.provision "shell", name: "[kubernetes]", path: "./scripts/kubernetes.sh", privileged: false
+
+    # GO
+    lab.vm.provision "shell", name: "[golang]", path: "./scripts/go.sh", privileged: false
   end
   # END INSTANCE LAB
 

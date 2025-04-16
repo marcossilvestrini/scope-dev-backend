@@ -510,7 +510,12 @@ spec:
 - Participação ativa em projetos abertos.
 - Melhores práticas para contribuição: Issues, Pull Requests e revisões técnicas.
 
-### Ícones para Títulos e Subtítulos Técnicos
+## Referências
+
+- [Openstack]()
+  - [Koalla Ansible](https://github.com/openstack/kolla-ansible?tab=readme-ov-file)
+
+## Ícones para Títulos e Subtítulos Técnicos
 
 🔧 Infraestrutura e Orquestração
 
