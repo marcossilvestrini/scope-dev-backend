@@ -27,6 +27,7 @@ if echo "$RELEASE_INFO" | grep -q -i "debian\|ubuntu"; then
     tree whois \
     bridge-utils
     
+    
     # Configure profile
     sudo cp -f configs/commons/.bashrc_debian .bashrc
     sudo cp -f configs/commons/.bashrc_debian /root/.bashrc

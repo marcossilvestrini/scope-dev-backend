@@ -177,13 +177,229 @@ Se preferir consumir de forma mais estruturada, existem SDKs oficiais:
 
 OpenStack oferece uma plataforma robusta e extensível, com centenas de configurações possíveis para customização de ambientes altamente escaláveis.
 
-### ☸️Kubernetes
+## ☸️Kubernetes
 
-- Plataforma de orquestração de contêineres para automação de implantação, escalonamento e operações de aplicações em contêineres.
-- Principais componentes: API Server, Scheduler, etcd, Controller Manager.
-- Recursos fundamentais: Pods, Deployments, Services, StatefulSets, ConfigMaps, Secrets.
-- Ferramentas adicionais: Helm e Kustomize para configuração e gerenciamento.
-- Segurança: RBAC, Network Policies e gestão de Secrets.
+Kubernetes é uma plataforma de orquestração de contêineres altamente extensível, resiliente e declarativa, criada para automatizar a implantação, escala e gerenciamento de aplicações em contêineres.
+
+---
+
+### 🧠 Arquitetura Interna
+
+#### 🔹 Master Components
+
+- **kube-apiserver**: Interface REST e ponto de entrada para comunicação externa. Todos os comandos `kubectl` interagem com ele.
+- **etcd**: Banco de dados chave-valor que guarda todo o estado desejado do cluster.
+- **kube-scheduler**: Responsável por alocar Pods em nós com base em afinidade, recursos disponíveis, tolerâncias etc.
+- **kube-controller-manager**: Executa diversos controladores (replication, endpoints, namespace, etc.)
+
+#### 🔹 Node Components
+
+- **kubelet**: Componente que roda em cada nó e garante que os Pods estejam em conformidade com o manifesto.
+- **kube-proxy**: Gerencia regras de rede no host e realiza roteamento para os Pods.
+- **Container Runtime**: Docker, containerd, CRI-O, entre outros.
+
+---
+
+### 🧱 Recursos Fundamentais (`kind`)
+
+Cada recurso no Kubernetes é uma entidade declarada em YAML (ou JSON) e registrada na API Server.
+
+#### 1. `Pod` - Unidade mínima de execução
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+```
+
+#### 2. `Deployment` - Gerenciamento declarativo de Pods
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+```
+
+#### 3. `Service` - Abstração para comunicação entre Pods
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+```
+
+#### 4. `ConfigMap` - Armazenamento de configuração não sensível
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_ENV: production
+  LOG_LEVEL: debug
+```
+
+#### 5. `Secret` - Armazenamento de informações sensíveis
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  password: cGFzc3dvcmQ= # base64 de 'password'
+```
+
+#### 6. `Ingress` - Regras de roteamento HTTP
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-example
+spec:
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
+```
+
+#### 7. `StatefulSet` - Gerenciamento de pods com identidade estável
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-stateful
+spec:
+  serviceName: "db"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+        - name: db
+          image: postgres
+```
+
+#### 8. `DaemonSet` - Executa um pod em todos (ou alguns) nós
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-agent
+spec:
+  selector:
+    matchLabels:
+      app: log-agent
+  template:
+    metadata:
+      labels:
+        app: log-agent
+    spec:
+      containers:
+        - name: agent
+          image: fluentd
+```
+
+#### 9. `Job` - Execução de tarefas únicas
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          command: ["echo", "Hello Job"]
+      restartPolicy: Never
+```
+
+#### 10. `CronJob` - Execução de jobs agendados
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-job
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cron
+              image: busybox
+              command: ["date"]
+          restartPolicy: OnFailure
+```
+
+---
+
+### 🛡️ Segurança
+
+- RBAC para controle de acesso fino (`Role`, `RoleBinding`, `ClusterRole`)
+- Network Policies para segmentação entre namespaces
+- Pod Security Admission para validação de políticas de execução
+
+---
+
+### 🔧 Observabilidade
+
+- Prometheus Operator para coleta de métricas
+- Grafana dashboards
+- Alertmanager para envio de alertas
+- Fluent Bit para coleta de logs
+- OpenTelemetry para tracing
+
+---
 
 ### 🛡️Harbor
 
@@ -332,7 +548,12 @@ Serviços (ClusterIP, NodePort, LoadBalancer), Ingress e CNIs (Calico, Flannel, 
 - Participação ativa em projetos abertos.
 - Melhores práticas para contribuição: Issues, Pull Requests e revisões técnicas.
 
-### Ícones para Títulos e Subtítulos Técnicos
+## Referências
+
+- [Openstack]()
+  - [Koalla Ansible](https://github.com/openstack/kolla-ansible?tab=readme-ov-file)
+
+## Ícones para Títulos e Subtítulos Técnicos
 
 🔧 Infraestrutura e Orquestração
 
