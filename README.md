@@ -191,16 +191,54 @@ OpenStack oferece uma plataforma robusta e extensível, com centenas de configur
 - Integração nativa com Kubernetes.
 - Funcionalidades avançadas como verificação de vulnerabilidades através do Trivy.
 
-## Redes e Segurança
+## 🌐Redes
 
-### 🌐Redes
+![modelo-osi](images/osi-1.png)
+Fonte:https://sistemasfatec.wordpress.com/bases-da-internet/modelo-osi/
 
-- Redes em Kubernetes: Serviços (ClusterIP, NodePort, LoadBalancer), Ingress e CNIs (Calico, Flannel, Cilium).
-- Protocolos essenciais: TCP/IP, UDP, HTTP/HTTPS, DNS.
-- VPNs e técnicas de balanceamento de carga (NGINX, HAProxy).
+### 📜Protocolos essenciais
 
-### Segurança de Infraestrutura
+TCP/IP, UDP, HTTP/HTTPS, DNS.
 
+### Balanceamento de Carga
+
+(NGINX, HAProxy).
+
+### OVN e OVS
+
+**OVN (Open Virtual Network) e OVS (Open vSwitch)** são componentes críticos em arquiteturas de redes definidas por software (SDN), frequentemente utilizados em ambientes virtualizados e nativos em Kubernetes/OpenStack.
+
+#### OVS – Open vSwitch
+
+- Função: É um switch virtual multilayer, programável via OpenFlow.
+- Objetivo: Prover switching entre máquinas virtuais com suporte a redes virtuais complexas, VLANs, tunneling (VXLAN, GRE), QoS e ACLs.
+- Uso comum: Implementado em hypervisores (KVM, Xen) e contêineres.
+- Ponto-chave: Atua como dataplane. Interface com controladores SDN.
+
+#### OVN – Open Virtual Network
+
+- Função: É uma camada de network virtualization que opera sobre OVS.
+- Objetivo: Prover redes L2/L3 overlay com suporte nativo a roteamento, NAT, ACLs, DHCP, DNS e lógica distribuída.
+- Arquitetura: Baseada em componentes como northd, ovn-northdb, ovn-southdb, ovn-controller.
+- Ponto-chave: Atua como control plane, orquestrando a lógica de rede sobre OVS.
+
+#### Relação OVN ↔ OVS
+
+- OVS é o motor de switching.
+- OVN é o cérebro que provisiona e controla a rede virtual, utilizando OVS como backend.
+
+#### Cenário corporativo típico
+
+Em clusters Kubernetes com CNI OVN-Kubernetes.  
+Em nuvens privadas baseadas em OpenStack Neutron com backend OVN.
+
+### Redes em Kubernetes
+
+Serviços (ClusterIP, NodePort, LoadBalancer), Ingress e CNIs (Calico, Flannel, Cilium).
+
+## 🔒Segurança
+
+- VPNs
 - Hardening de contêineres: uso de ferramentas como Docker Bench e kube-bench.
 - Implementação de Network Policies para segmentação de tráfego.
 - Gestão segura e criptografada de Secrets e RBAC para controle de acessos.
